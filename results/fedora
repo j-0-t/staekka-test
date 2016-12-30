@@ -1,0 +1,2 @@
+echo a long string fails sometimes if selinux is enabled
+echo a long string fails sometimes for zsh

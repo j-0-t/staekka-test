@@ -1,0 +1,15 @@
+load staekka Test=true
+<ruby>
+staekka_path = Msf::Config.staekka_path
+staekka_test_path = File.expand_path(File.join(Msf::Config.staekka_path, '..', 'staekka-test'))
+staekka_extra_path = File.expand_path(File.join(Msf::Config.staekka_path, '..', 'staekka-dev-modules' ))
+run_single("loadpath #{staekka_path}/modules")
+puts("msf> loadpath #{staekka_path}/modules")
+run_single("loadpath #{staekka_test_path}/modules")
+run_single("loadpath #{staekka_test_path}/modules")
+puts("msf> loadpath #{staekka_test_path}/modules")
+run_single("loadpath #{staekka_extra_path}/modules")
+puts("msf> loadpath #{staekka_extra_path}/modules")
+</ruby>
+setg VERBOSE true
+

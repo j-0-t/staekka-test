@@ -1,0 +1,9 @@
+2000-11-07 08:47:54,569 INFO zen.zencommand: Deleting command 10.00.118.68 from $ZENHOME/libexec/poll_postgres.py '10.00.118.68' '5432' 'postgres' 'banqxxx' 'False' server
+2000-11-07 09:38:20,240 INFO zen.zencommand: Deleting command 10.00.118.68 from $ZENHOME/libexec/poll_postgres.py '10.00.118.68' '5432' 'postgres' 'p0$tGre$' 'False' server
+2000-09-01 11:14:02,249 INFO zen.zencommand: Deleting command 10.00.118.68 from $ZENHOME/libexec/poll_postgres.py '10.00.118.68' '5432' 'postgres' '' 'False' server
+Jun 27 08:33:53 zenoss01 sshd[20665]: Failed password for invalid user InXX,XXXX from 10.00.82.42 port 3224 ssh2
+Nov  4 18:28:38 localhost sshd[11113]: Failed password for invalid user uXXXX from 10.00.2.17 port 51474 ssh2
+unknown user name or','The server was unable to logon the Windows NT account \'uhXXXXXX\' due to the following error: Logon failure:
+exampleqLU:Failed password for username from 10.1.2.3 port 53529 ssh2qMh@h
+exampleqKU|Password changed There were errors changing the password for the user account DOMAIN\user. Password was in an invalid formatXXX?h
+

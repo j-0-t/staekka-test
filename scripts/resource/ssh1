@@ -1,0 +1,19 @@
+load staekka
+<ruby>
+staekka_path =  ENV['STAEKKA_PATH']
+
+run_single("loadpath #{staekka_path}/modules")
+</ruby>
+
+use auxiliary/shell/ssh_session
+#setg VERBOSE true
+#load editor
+set RHOSTS 127.0.0.1
+set USERNAME user
+set PASSWORD password
+run
+#use post/test/staekka/play
+#set SESSION 1
+#run
+
+

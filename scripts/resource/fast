@@ -1,0 +1,5 @@
+load staekka
+use auxiliary/shell/interactive
+set CMD /bin/bash
+run
+

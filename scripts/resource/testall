@@ -1,0 +1,8 @@
+<ruby>
+path = ::File.dirname
+run_single "resource #{path}/load_staekka"
+run_single "resource #{path}/multi-shell"
+run_single "resource #{path}/staekka_ssh"
+run_single "resource #{path}/basic_tests"
+
+</ruby>

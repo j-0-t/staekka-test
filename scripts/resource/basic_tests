@@ -1,0 +1,29 @@
+<ruby>
+tests = [  'post/test/staekka/advance_shell',
+          'post/test/staekka/cache',
+          'post/test/staekka/updatedb',
+          'post/test/staekka/unixcommands',
+          'post/test/staekka/file2',
+          'test/staekka/senddata'
+]
+i = 0
+if (framework.sessions.length > 0)
+        print_status("starting basic tests")
+        framework.sessions.each_key do |sid|
+                i += 1
+                j = 0
+                session = framework.sessions[sid]
+                print_good("==================================================================")
+                if session.rstream.class.to_s == 'Msf::Sessions::PTY::PtySocket'
+                  print_good("CMD=#{session.rstream.expect_command}")
+                end
+                tests.each do |mod|
+                  j += 1
+                  print_status("Session: #{i}/#{framework.sessions.length} | Tests #{j}/#{tests.length}")
+                  print_status("use #{mod}")
+                  run_single("use #{mod}")
+                  run_single("run")
+                end
+        end
+end
+</ruby>

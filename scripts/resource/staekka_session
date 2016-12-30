@@ -1,0 +1,4 @@
+use auxiliary/shell/interactive
+run
+setg SESSION 1
+

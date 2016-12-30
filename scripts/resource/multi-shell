@@ -1,0 +1,30 @@
+<ruby>
+# Status:
+#	not working shells:
+#				esh (http://slon.ttk.ru/esh/)
+#
+#  shells:
+#		bash:	works fine
+#		csh:	token is not echoed after echo a ENV var => timeout but ok
+#		ksh:	error on long strings; the token is not echoed
+#		tcsh:	works fine
+#		zsh:	works fine; causes sometime issuses (some \a in output, etc)
+#				depending on the prompt; issues with syntax highlighting;
+#				=> so it is disabled by default
+#				NOT working with oh-my-zsh!
+#		esh:	does not work because the ; following token is not echoed
+#		sash:	works fine (added some extra commands)
+#		dash:	works fine
+#	    remote:	works fine (no echo shell via ssh user@host bash; similar to
+#	    many shellcodes)
+#
+installed_shells = ["/bin/bash", "/bin/csh", "/bin/ksh", "/bin/tcsh",
+"/bin/zsh", "/usr/bin/esh", "/bin/sash", "/bin/dash", "busybox sh","ssh rubytest bash"]
+installed_shells.each do |shell|
+	print_good("==================================================================")
+	print_good("SHELL: #{shell}")
+	run_single("use auxiliary/shell/interactive")
+	run_single("set CMD #{shell}")
+	run_single("run")
+end
+</ruby>

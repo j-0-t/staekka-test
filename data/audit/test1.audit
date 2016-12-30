@@ -1,0 +1,129 @@
+<check_type : "Unix">
+
+# comment1
+<custom_item>
+# comment2
+ # comment3
+  type: CMD_EXEC
+  description: "Make sure that we are notrunning FreeBSD 4.9 or higher"
+  info                   : "type is not needed, disable it."
+  info	: "fooooooooooo"
+  cmd: "uname -a"
+ timeout: 7200
+  expect: "Linux"
+  dont_echo_cmd: YES
+</custom_item>
+<custom_item>
+system: "Linux"
+type: FILE_CHECK
+description: "Permission and ownership check for /etc/passwd"
+file: "/etc/passwd"
+owner: "root"
+group: "r00t"
+mode: "-rw-r--r--"
+</custom_item>
+<custom_item>
+system: "Linux"
+type: FILE_CHECK
+description: "Permission and ownership check for /etc/pam.d/*"
+file: "/etc/pam.d/*"
+mode: "-rw-r--r--"
+ignore: /etc/pam.d
+ignore: /etc/pam.d/ssh*
+</custom_item>
+<custom_item>
+system: "Linux"
+type: FILE_CHECK
+description: "Permission and ownership check for /etc/passwd"
+file: "/etc/passwd"
+owner: "root"
+attr: -------------e--
+md5: 0591e639017eb3f79a588c3d1ed29a38
+file_type: "b|c|d|f"
+</custom_item>
+<custom_item>
+        system         : "Linux"
+        type            : FILE_CHECK
+        description     : "Permission and ownership check ~/.ssh/authorized_keys"
+        info            : "Checking that .ssh/authorized_keys in home directories have the specified ownership/mode"
+        file            : "~/.ssh/authorized_keys"
+        mode            : "600"
+</custom_item>
+<custom_item>
+system: "Linux"
+type: FILE_CHECK
+description: "Permission and ownership check for /etc/passwd"
+file: "passwd"
+search_locations: "/:home:/usr/local/etc:/etc:/usr/etc"
+owner: "root"
+attr: -------------e--
+md5: 0591e639017eb3f79a588c3d1ed29a38
+file_type: "b|c|d|f"
+</custom_item>
+<custom_item>
+system: "Linux"
+type: FILE_CHECK
+description: "Permission and ownership check for /etc/shadow"
+file: "/etc/shadow"
+search_locations: "/:home:/usr/local/etc:/etc:/usr/etc"
+owner: "root"
+mode: "-rw-r-----"
+mask: 027
+</custom_item>
+<custom_item>
+type: FILE_CONTENT_CHECK
+file             : "/etc/passwd"
+search_locations : "/etc"
+regex            : "^root:*"
+expect           : ":0:0:"
+info: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+</custom_item>
+</custom_item>
+<custom_item>
+type: GRAMMAR_CHECK
+file             : "/etc/passwd"
+regex            : "^root:*"
+regex            : ":0:0:"
+regex            : "^bin:"
+#regex            : "r00t"
+info: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+</custom_item>
+<custom_item>
+system: "Linux"
+info: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+type    : PROCESS_CHECK
+name : sshd
+status: ON
+</custom_item>
+<custom_item>
+system: "Linux"
+info: "BBBBBBBBBBBBBBBBBBBBBBBBB"
+type    : RPM_CHECK
+description: "RPM check for iproute-2.4.7-10 should fail"
+rpm: "iproute-2.4.7-10"
+operator: "gt"
+required: NO
+</custom_item>
+<custom_item>
+ system                 : "Linux"
+ type                   : CHKCONFIG
+ description    : "4.7 Enable IPtables"
+ info                   : "IPtables is an application that allows a system administrator to configure the IPv4 tables, chains and rules provided" 
+ info                   : "by the Linux kernel firewall"
+ reference              : "PCI|1.2,PCI|2.2.2,CCE|CCE-4189-7,PCI|1.1,Level|1S,800-53|CM-7,800-53|CM-6"
+ see_also               : "https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_6_Benchmark_v1.2.0.pdf"
+ solution               : "1. '# service iptables restart' 2. '# chkconfig iptables on'"
+ service                : "ssh"
+ levels                 : "2345"
+ status                 : ON
+</custom_item>
+<custom_item>
+ type: XINETD_SVC
+ description: "Make sure that telnet is disabled"
+ service: "telnet"
+ status: OFF
+</custom_item>
+
+</check_type>
+
+

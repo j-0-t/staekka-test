@@ -1,0 +1,6 @@
+use auxiliary/scanner/ssh/ssh_login
+set RHOSTS 127.0.0.1
+set USERNAME rubyuser
+set PASSWORD rubyuser
+run
+

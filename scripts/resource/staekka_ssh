@@ -1,0 +1,6 @@
+use auxiliary/shell/ssh_session
+set RHOSTS 127.0.0.1
+set USERNAME user
+set PASSWORD password
+run
+

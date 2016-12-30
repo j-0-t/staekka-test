@@ -1,0 +1,62 @@
+#
+# lalalala
+#
+<check_type : "Unix">
+
+<if>
+  <condition type: "or">
+    <custom_item>
+    type		: CMD_EXEC
+		description	: "echo IF: YES"
+   	cmd		: "echo OK................."
+		expect		: "OK"
+    </custom_item>
+  </condition>
+<then>
+    <custom_item>
+		type		: CMD_EXEC
+		description	: "echo THEN1: YES"
+   	cmd		: "echo OK"
+		expect		: "OK"
+    </custom_item>
+    <custom_item>
+		type		: CMD_EXEC
+		description	: "echo THEN2: YES"
+   	cmd		: "echo OK"
+		expect		: "OK"
+    </custom_item>
+
+</then>
+<else>
+    <custom_item>
+		type		: CMD_EXEC
+		description	: "echo ELSE: NO"
+   	cmd		: "echo NO"
+		expect		: "OK"
+    </custom_item>
+</else>
+</if>
+
+<custom_item>
+    type		: CMD_EXEC
+		description	: "echo NORMAL1: YES"
+   	cmd		: "echo OK"
+		expect		: "OK"
+</custom_item>
+<custom_item>
+    type		: CMD_EXEC
+		description	: "echo NORMAL2: YES"
+   	cmd		: "echo OK"
+		expect		: "OK"
+</custom_item>
+<custom_item>
+    type		: CMD_EXEC
+		description	: "Should fail: YES"
+   	cmd		: "echo OK"
+		expect		: "NO Echo!"
+</custom_item>
+
+</check_type>
+
+
+
